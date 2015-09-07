@@ -1,0 +1,15 @@
+[Unit]
+Description=Data Container
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill data-container1
+ExecStartPre=-/usr/bin/docker rm data-container1
+ExecStartPre=/usr/bin/docker pull unverferthz/virtualisation_ass1/datacontainer
+ExecStart=/usr/bin/docker run --rm --name data-container1 unverferthz/virtualisation_ass1/datacontainer
+ExecStop=/usr/bin/docker stop data-container1
+
+[X-Fleet]
+Conflicts=data-container@*.service

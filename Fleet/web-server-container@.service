@@ -1,0 +1,15 @@
+[Unit]
+Desciption=Apache Web Server
+After=data-container@%.service
+Requires=data-container@%i.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill web-server1
+ExecStartPre=-/usr/bin/docker rm web-server1
+ExecStartPre=/usr/bin/docker pull unverferthz/virtualisation_assn/webserver 
+ExecStart=/usr/bin/docker run --rm --name web-server1 unverferthz/virtualisation_assn/webserver --volumes-from data-container1 /bin/bash 
+ExecStop=/usr/bin/docker stop web-server1
+
+[X-Fleet]
+Conflicts=web-server@*.service

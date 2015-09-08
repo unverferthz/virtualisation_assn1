@@ -19,4 +19,6 @@ ENV APACHE_LOCK_DIR /var/lock/apache2
 RUN mkdir -p $APACHE_RUN_DIR $APACHE_LOCK_DIR $APACHE_LOG_DIR
 EXPOSE 80
 
-CMD ["/usr/bin/supervisord"]
+ENTRYPOINT ["/usr/sbin/apache2"]
+
+CMD ["-D", "FOREGROUND"]

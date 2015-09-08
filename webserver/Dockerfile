@@ -9,8 +9,6 @@ RUN apt-get -yqq install apache2
 
 RUN apt-get -yqq install supervisor
 
-ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
 WORKDIR /var/www/html
 
 ENV APACHE_RUN_USER www-data
